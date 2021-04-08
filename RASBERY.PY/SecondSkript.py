@@ -44,7 +44,9 @@ try:
     for i in range(user_input):
         for j in range(1, 255):
             num2dac(j)
-            time.sleep(0.00392157)
-            GPIO.output(DAC, 0)
+            time.sleep(0.005)
+        for j in range(255, 1, -1):
+            num2dac(j)
+            time.sleep(0.005)
 finally:
     GPIO.cleanup()
