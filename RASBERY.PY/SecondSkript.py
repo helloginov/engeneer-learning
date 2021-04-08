@@ -5,14 +5,8 @@ def decToBinList(decNumber):
     '''
     transforms dec number to bin array
     '''
-    binList = [0]*8
-    i = 0
-    while decNumber != 1:
-        binList[i] = decNumber % 2
-        i += 1
-        decNumber //= 2
-    binList[i] = 1
-    return list(reversed(binList))
+    return list(map(int, bin(decNumber)[2:].split('')))
+
 
 
 def num2dac(value):
@@ -35,6 +29,7 @@ def set_up_rasbery():
     GPIO.output(DAC, 0)
 
 
+print(decToBinList(128))
 print('Enter the number of repetitions:')
 try:
     user_input = int(input())
