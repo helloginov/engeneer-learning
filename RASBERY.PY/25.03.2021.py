@@ -37,7 +37,7 @@ def lightNumber(number):
     for a,b in zip(LEDS, lightUp):
         GPIO.output(a, a*b)
 
-#def runningPattern(pattern, direction):
+
 
 
 
@@ -50,4 +50,5 @@ GPIO.setup(DAC, GPIO.OUT)
 GPIO.output(LEDS, 0) #turn off all the lights
 GPIO.output(DAC, 0)
 runningPattern(5, 1)
-GPIO.cleanup()
+finally:
+    GPIO.cleanup()
