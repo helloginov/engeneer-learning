@@ -17,9 +17,9 @@ def main():
             print('{:d} = {:f} V'.format(n, n/255 * max_voltage))
             FirstSkript.num2dac(n)
             if GPIO.input(COMP):
-                print("LESS")
-            else:
                 print("MORE")
+            else:
+                print("LESS")
                 
     finally:
         GPIO.cleanup()
