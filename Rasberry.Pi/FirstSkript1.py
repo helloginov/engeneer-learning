@@ -1,11 +1,17 @@
 import FirstSkript
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
+import time
 
 
 def main():
     try:
+        COMP = 4
+        POT = 17   
         FirstSkript.set_up_rasbery()
-        max_voltage = 3 # V
+        GPIO.setup(COMP, GPIO.IN)
+        GPIO.setup(POT, GPIO.OUT)
+        GPIO.output(POT, 1)
+        max_voltage = 3.3 # mV
         while True:
 
             n = int(input("Ask comparator (-1 to exit):"))
@@ -14,8 +20,9 @@ def main():
             elif not (0 <= n < 256):
                 print("Input must be a number from 0 to 255")
                 continue
-            print('{:d} = {:f} V'.format(n, n/255 * max_voltage))
+            print('{:d} = {:f} mV'.format(n, n/255 * max_voltage))
             FirstSkript.num2dac(n)
+            time.sleep(0.001)
             if GPIO.input(COMP):
                 print("MORE")
             else:
@@ -24,4 +31,3 @@ def main():
     finally:
         GPIO.cleanup()
 
-main()

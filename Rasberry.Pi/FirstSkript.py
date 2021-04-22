@@ -11,7 +11,7 @@ def num2dac(value):
     '''
     lights up the diods
     '''
-    lightUp = decToBinList(value)
+    lightUp = reversed(decToBinList(value))
     for a,b in zip(DAC, lightUp):
         GPIO.output(a, a*b)
 
@@ -20,12 +20,14 @@ def set_up_rasbery():
     global DAC, LEDS
     DAC = [10, 9, 11, 5, 6, 13, 19, 26]
     LEDS = [24, 25, 8, 7, 12, 16, 20, 21]
-    COMP = 1                         #put correct value
+    COMP = 4
+    POT = 17                         
 
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(LEDS, GPIO.OUT)
     GPIO.setup(DAC, GPIO.OUT)
     GPIO.setup(COMP, GPIO.IN)
+    GPIO.setup(POT, GPIO.OUT)
     GPIO.output(LEDS, 0) #turn off all the lights
     GPIO.output(DAC, 0)
 

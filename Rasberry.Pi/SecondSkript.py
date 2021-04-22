@@ -21,3 +21,6 @@ def main():
                 time.sleep(0.005)
     finally:
         GPIO.cleanup()
+
+
+main()

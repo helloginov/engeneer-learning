@@ -5,16 +5,24 @@ import time
 
 def main():
     try:
+        COMP = 4
+        POT = 17   
         FirstSkript.set_up_rasbery()
-        max_voltage = 3  #V
+        GPIO.setup(COMP, GPIO.IN)
+        GPIO.setup(POT, GPIO.OUT)
+        GPIO.output(POT, 1)
+        max_voltage = 3.3 # mV
         dig_vol = 0
         while True:
-            GPIO.output(COMP, 0)
             for i in range(256):
                 FirstSkript.num2dac(i)
-                if not GPIO.input(COMP):
+                time.sleep(0.001)
+                if GPIO.input(COMP):
                     dig_vol = i
-            print('digital value: {:d}; analog value: {:f}'.format(dig_vol, dig_vol * max_voltage / 255))
-            time.sleep(0.01)
+            print('digital value: {:d}; analog value: {:f} mV'.format(dig_vol, dig_vol * max_voltage / 255))
+            time.sleep(0.001)
     finally:
         GPIO.cleanup()
+
+
+main()
